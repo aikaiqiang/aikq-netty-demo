@@ -45,10 +45,10 @@ public final class SimpleServer {
 							// 自己的逻辑Handler
 							pipeline.addLast(new HelloServerHandler());
 						}
-					});
+					})
+					.option(ChannelOption.SO_BACKLOG, 128)
+					.childOption(ChannelOption.SO_KEEPALIVE, true);
 
-			bootstrap.option(ChannelOption.SO_BACKLOG, 128);
-			bootstrap.childOption(ChannelOption.SO_KEEPALIVE, true);
 			ChannelFuture future = bootstrap.bind(8888).sync();
 			if (future.isSuccess()){
 				System.out.println("服务端正常启动。。。");
@@ -129,8 +129,7 @@ public final class SimpleServer {
 			}
 
 			// 返回客户端消息 - 我已经接收到了你的消息
-//			channelHandlerContext.writeAndFlush("Received your message ! you send:" + s + "\n");
-
+			channelHandlerContext.writeAndFlush("Received your message ! you send:" + s + "\n");
 		}
 
 		@Override

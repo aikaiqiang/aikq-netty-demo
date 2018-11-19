@@ -40,6 +40,7 @@ public class SimpleClient {
 			bootstrap.group(eventLoopGroup)
 					.channel(NioSocketChannel.class)
 					.remoteAddress(host,port)
+//					.option(ChannelOption.TCP_NODELAY, true)
 					.handler(new ChannelInitializer<SocketChannel>() {
 						@Override
 						protected void initChannel(SocketChannel socketChannel) throws Exception {
